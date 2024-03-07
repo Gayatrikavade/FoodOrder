@@ -9,7 +9,6 @@ import { VerifyEmailComponent } from './component/verify-email/verify-email.comp
 import { ForgetPasswordComponent } from './component/forget-password/forget-password.component';
 import { AboutUsComponent } from './component/about-us/about-us.component';
 import { ContactUsComponent } from './component/contact-us/contact-us.component';
-import { AuthGuard } from './shared/models/auth.guard';
 
 export const routes: Routes = [
   {path:'',redirectTo:'log-in',pathMatch:'full'},

@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FoodService } from '../../services/food/food.service';
 import { Foods } from '../../shared/models/food';
 import { CartService } from '../../services/cart/cart.service';
+import { AuthService } from 'src/app/services/authentication/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-foodpage',
@@ -16,7 +18,9 @@ export class FoodpageComponent implements OnInit{
   constructor(private route:ActivatedRoute ,
     private foodService:FoodService,
     private cartService:CartService,
-    private router:Router)
+    private router:Router,
+    private authService:AuthService,
+    private matSnackBar:MatSnackBar)
     { }
 
   ngOnInit(): void {
@@ -29,9 +33,25 @@ export class FoodpageComponent implements OnInit{
     });
   }
   addToCart(){
-    if(this.food){
-    this.cartService.addToCart(this.food);
-    this.router.navigateByUrl('/cart-page');
+    if(this.authService.isLoggedIn)
+    {
+     if(this.food){
+      this.cartService.addToCart(this.food);
+      this.router.navigateByUrl('/cart-page');
+      }
     }
+    else
+    {
+      this.showMessage('Login First');
+      this.router.navigate(['/log-in']);
+    }
+  }
+
+  showMessage(message: string) {
+    this.matSnackBar.open(message,'Close',{
+      duration:3000,
+      horizontalPosition:'end',
+      verticalPosition:'top'
+    })
   }
 }

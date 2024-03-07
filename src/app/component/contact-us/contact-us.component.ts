@@ -1,6 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/authentication/auth.service';
 
 @Component({
   selector: 'app-contact-us',
@@ -13,13 +15,16 @@ export class ContactUsComponent {
   submitted: boolean = false;
   formError: boolean = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,private authService:AuthService,private matSnackBar:MatSnackBar) {}
 
   submitForm() {
-    if (this.contactForm.invalid) {
-      this.formError = true;
-      return;
-    }
+    if(this.authService.isLoggedIn)
+    {
+      if (this.contactForm.invalid) {
+        this.formError = true;
+        return;
+      }
+      
     
     this.submitted = true;
     
@@ -27,5 +32,20 @@ export class ContactUsComponent {
     setTimeout(() => {
       this.router.navigate(['/home']);
     }, 1000);
+    }
+    else
+    {
+      this.showMessage('Login First');
+      this.router.navigate(['/log-in']);
+    }
+    
+  }
+
+  showMessage(message: string) {
+    this.matSnackBar.open(message,'Close',{
+      duration:3000,
+      horizontalPosition:'end',
+      verticalPosition:'top'
+    })
   }
 }
