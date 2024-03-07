@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { CanActivate, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { AuthService } from 'src/app/services/authentication/auth.service';
@@ -17,4 +18,5 @@ export class AuthGuard implements CanActivate {
     }
     return of(true);
   }
+
 }

@@ -1,42 +1,34 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Route, Router } from '@angular/router';
-import { AuthService } from '../../services/authentication/auth.service';
-import { User } from '@firebase/auth-types';
-import { Observable } from 'rxjs';
+import { Component, EventEmitter, Input, Output, HostListener } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Observable } from 'rxjs';
+import { User } from '@firebase/auth-types';
+import { AuthService } from '../../services/authentication/auth.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit{
-
- subMenu =document.getElementById("subMenu");
-
- toggleMenu(){
-  this.subMenu?.classList.toggle("open-menu");
- }
-
+export class HeaderComponent {
   @Input() isLoggedIn!: boolean;
-  user$!: Observable<User | null>;
-  @Output() logout: EventEmitter<void> = new EventEmitter<void>();
+  user$: Observable<User | null>;
+  @Output() logout: EventEmitter<void> = new EventEmitter<void>;
+  showDropdown = false;
 
-  constructor(private router:Router ,private authService:AuthService,private afAuth:AngularFireAuth){}
-  
-  ngOnInit(): void {
-    this.user$ = this.afAuth.authState;
+  constructor(private fireAuth: AngularFireAuth, private authService: AuthService) {
+    this.user$ = this.fireAuth.authState;
     this.user$.subscribe(user => {
-      if (user) {
-        // User is signed in, you can fetch user data here
-        console.log('User is logged in:', user);
-        // You can store user data in a variable to display in the template
-        // this.userData = user;
-      } else {
-        // User is signed out
-        console.log('User is logged out');
-      }
+      this.isLoggedIn = !!user;
     });
+  }
+
+  toggleDropdown(event: Event) {
+    event.stopPropagation();
+    this.showDropdown = !this.showDropdown;
+  }
+
+  onDropdownClick(event: Event) {
+    event.stopPropagation(); 
   }
 
   onLogout(): void {
@@ -44,4 +36,8 @@ export class HeaderComponent implements OnInit{
     this.authService.logOut();
   }
 
+  @HostListener('document:click', ['$event'])
+  clickout(event: any) {
+    this.showDropdown = false;
+  }
 }

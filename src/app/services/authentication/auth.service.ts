@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import {AngularFireAuth} from '@angular/fire/compat/auth';
-import {GoogleAuthProvider ,FacebookAuthProvider} from '@angular/fire/auth';
+import {GoogleAuthProvider} from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 import { User } from '@firebase/auth-types';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 
@@ -16,10 +17,8 @@ export class AuthService {
 
   user:User|null=null;
 
-
-
-  constructor(private fireAuth:AngularFireAuth ,private router:Router) {
-     this.fireAuth.authState.subscribe(user => {
+  constructor(private fireAuth:AngularFireAuth ,private router:Router,private matSnackBar:MatSnackBar) {
+    this.fireAuth.authState.subscribe(user => {
       this.user = user; // Update user data when authentication state changes
       this.isLoggedIn = !!user;
     });
@@ -28,23 +27,12 @@ export class AuthService {
   ngOnInit(): void {
    
   }
-  // isLoggedIn(): boolean {
-  //   // Check if the user is authenticated (You can implement this based on your authentication mechanism)
-  //   return !!localStorage.getItem('token');
-  // }
-  
+ 
   login(email:string ,password:string){
     this.fireAuth.signInWithEmailAndPassword(email,password).then((res)=>{
       localStorage.setItem('token','true');
       this.isLoggedIn=true;
-      
-
-      if(res.user?.emailVerified == true){
-        this.router.navigate(['home']);
-      }
-      else{
-        this.router.navigate(['/verify-email']);
-      }
+      this.router.navigate(['/home']);
     },
     err=>{
       alert('something went wrong');
@@ -53,27 +41,27 @@ export class AuthService {
     )
   }
 
-  register(email:string,password:string){
-    this.fireAuth.createUserWithEmailAndPassword(email,password).then(res=>{
-      alert('Registered successfully');
-      this.router.navigate(['/login']);
-      this.sendEmailForVerification(res.user);
-      
-    },
-    err=>{
-      alert(err.message);
-      this.router.navigate(['/register']);
-    }
-    )
+  
+  register(email:string, password:string){
+    this.fireAuth.createUserWithEmailAndPassword(email, password)
+      .then(res => {
+        alert('Registered successfully');
+        this.isLoggedIn=true;
+        this.router.navigate(['/home']); // Navigate to home page upon successful registration
+      })
+      .catch(err => {
+        alert(err.message);
+        this.router.navigate(['/register']);
+      });
   }
+  
 
   logOut(){
     this.fireAuth.signOut().then(()=>{
       localStorage.removeItem('token');
       this.isLoggedIn=false;
       this.router.navigate(['/login']);
-
-    },
+  },
     err=>{
       alert(err.message);
     })
@@ -111,11 +99,20 @@ export class AuthService {
   googleSignIn(){
     return this.fireAuth.signInWithPopup(new GoogleAuthProvider).then((res)=>{
       this.router.navigate(['/home']);
+      this.showSuccessMessage("Login Successsfully");
       localStorage.setItem('token',JSON.stringify(res.user?.uid));
       this.isLoggedIn=true;
     },
     err=>{
       alert(err.message);
+    })
+  }
+
+  showSuccessMessage(message:string) {
+    this.matSnackBar.open(message,'Close',{
+      duration:3000,
+      horizontalPosition:'end',
+      verticalPosition:'top'
     })
   }
 }

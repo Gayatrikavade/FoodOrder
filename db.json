@@ -91,13 +91,12 @@
     ],
     "tags": [
         { "name": "All", "count": 8 },
-        { "name": "FastFood", "count": 6 },
-        { "name": "Pizza", "count": 4 },
-        { "name": "Lunch", "count": 3 },
-        { "name": "SlowFood", "count": 2 },
-        { "name": "Hamburger", "count": 1 },
+        { "name": "FastFood", "count": 5 },
+        { "name": "Pizza", "count": 1 },
+        { "name": "Lunch", "count": 5 },
+        { "name": "SlowFood", "count": 1 },
+        { "name": "Burger", "count": 1},
         { "name": "Fry", "count": 1 },
-        { "name": "Soup", "count": 1 },
         { "name": "Dinner", "count": 1 }
       ]
   }

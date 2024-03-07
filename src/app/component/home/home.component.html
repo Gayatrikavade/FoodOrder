@@ -1,7 +1,6 @@
-
-    <app-search></app-search>
-    <app-tag></app-tag>
-    <app-not-found [visible]="!foods || foods.length<=0" resetLinkText="Reset Search"></app-not-found>
+<app-search></app-search>
+<app-tag></app-tag>
+<app-not-found [visible]="!foods || foods.length<=0" resetLinkText="Reset Search"></app-not-found>
 <ul>
     <li *ngFor="let food of foods">
     <a routerLink="/food/{{food.id}}">
@@ -11,14 +10,6 @@
                 {{food.name}}
             </div>
             <span class="favourite {{food.favorite?'':'not'}}">♥</span>
-            <!-- <star-rating
-             a   [value]="food.star"
-                [totalstars]="5"
-                checkedcolor="red"
-                uncheckedcolor="black"
-                size="24px"
-                [readonly]="true">
-            </star-rating> -->
             <div class="product-itm-footer">
                 <div class="origins">
                     <span *ngFor="let origin of food.origins">
@@ -40,4 +31,7 @@
     </a>
     </li>
 </ul>
-<app-about-us></app-about-us>
+
+<section id="about-us">
+    <app-about-us></app-about-us>
+  </section>

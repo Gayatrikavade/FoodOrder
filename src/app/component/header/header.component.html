@@ -1,78 +1,19 @@
-<!-- <header>
-    <div class="container" *ngIf="isLoggedIn">
-        <a href="#" routerLink="/home" class="logo">TC ☺ Food Corner!</a>
-        <nav>
-            <ul>
-                <li > 
-                    <a href="#" routerLink="/cart-page">Cart</a>
-                    <a  href="#" (click)="onLogout()">Logout</a>
-                    <a href="#" routerLink="/contactus">Contact Us</a>
-                    <a href="#" routerLink="/home/about-us">About Us</a>
-                </li>
-                <div *ngIf="user">
-                    
-                    <p>Welcome, {{ user.displayName }}</p>
-                    <img [src]="user.photoURL" alt="Profile Picture">
-                    <button (click)="onLogout()">Logout</button>
-                  </div>
-                  
-            </ul>
-        </nav>
-    </div>
-</header>
-
-  
- -->
-
-<!-- <header>
-    <div class="container">
-      <a href="#" routerLink="/home" class="logo">TC ☺ Food Corner!</a>
-      <nav>
-        <ul>
-          <li>
-            <a href="#" routerLink="/cart-page">Cart</a>
-            <a href="#" routerLink="/contactus">Contact Us</a>
-            <a href="#" routerLink="/home/about-us">About Us</a>
-            <a *ngIf="isLoggedIn" class="user-profile">
-              <img src="{{ (user$ | async)?.photoURL }}" alt="Profile Picture">
-              <span>{{ (user$ | async)?.displayName }}</span>
-            <a class="dropdown-content">
-              <a href="#" (click)="onLogout()">Logout</a>
-            </a>
-        </a>
-        </ul>
-      </nav>
-    </div>
-  </header> -->
-
-  <header>
-    <div class="conatiner">
-      <nav>
-        <a href="#" routerLink="/home" class="logo">TC ☺ Food Corner!</a>
-        <ul>
-          <li><a href="#" routerLink="/cart-page">Cart</a></li>
-          <li><a href="#" routerLink="/contactus">Contact Us</a></li>
-          <li><a href="#" routerLink="/home/about-us">About Us</a></li>
-        </ul>
-        <a *ngIf="isLoggedIn" class="user-pic" (click)="toggleMenu()">
-          <img src="{{ (user$ | async)?.photoURL }}" alt="Profile Picture">
-        </a>
-
-        <div class="sub-menu-wrap" id="subMenu">
-          <div class="sub-menu">
-            <div class="user-info">
-              <img src="{{ (user$ | async)?.photoURL }}" alt="Profile Picture">
-              <span>{{ (user$ | async)?.displayName }}</span>
-            </div>
-            <hr>
-
-            <a href="#" class="sub-menu-link">
-              <img src="assets/logout.jpg" alt="">
-              <p>Log Out</p>
-              <span>></span>
-            </a>
+<header>
+  <div class="container">
+    <a routerLink="/home" class="logo">TC ☺ Food Corner!</a>
+    <nav>
+      <ul>
+        <li><a routerLink="/cart-page">Cart</a></li>
+        <li><a routerLink="/contactus">Contact Us</a></li>
+        <li><a [routerLink]="['/home']" fragment="about-us">About Us</a></li>
+        <li *ngIf="isLoggedIn" class="user-profile">
+          <img [src]="(user$ | async)?.photoURL" alt="Profile Picture" (click)="toggleDropdown($event)">
+          <div class="dropdown-content" [ngClass]="{'show': showDropdown}" (click)="onDropdownClick($event)">
+            <span>{{ (user$ | async)?.displayName }}</span>
+            <a href="#" (click)="onLogout()">Logout</a>
           </div>
-        </div>
-      </nav>
-    </div>
-  </header>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,51 @@
+.container {
+    margin-top: 50px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+  }
+  
+  .alert {
+    margin-top: 20px;
+  }
+  
+  .error-message {
+    color: #dc3545;
+  }
+  
+  .success-message {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+  }
+  
+h2 {
+    margin-bottom: 20px;
+  }
+
+
+@media screen and (max-width:768px)
+{
+  h1{
+    font-size: 20px;
+  }
+  
+}
+
+@media screen and (max-width: 512px){
+  h1{
+    font-size: 20px;
+  }
+
+  .form-group{
+   font-size: 70%;
+  }
+  .btn-danger {
+    font-size: 70%;
+  }
+}

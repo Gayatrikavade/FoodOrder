@@ -1,44 +1,69 @@
 .about-us {
-    background-color: #f9f9f9;
-    padding: 50px 0;
-  }
-  
-  .container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 0 15px;
-  }
-  
-  h2 {
-    font-size: 2em;
+  background-color: #f9f9f9;
+  padding: 50px 0;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.about-us-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.about-us-heading h2 {
+  font-size: 2em;
+  color: #e91111;
+  margin-bottom: 20px;
+}
+
+.about-us-info p {
+  color: #555;
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.contact-info p {
+  color: #555;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.footer-links {
+  margin-top: 20px;
+}
+
+.footer-links a {
+  color: #e91111;
+  text-decoration: none;
+  margin-right: 15px;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #c40000;
+}
+
+@media screen and (max-width: 760px){
+  .about-us-heading h2 {
+    font-size: 1em;
+    color: #e91111;
     margin-bottom: 20px;
   }
   
-  p {
-    margin-bottom: 15px;
+  .about-us-info p {
+    color: #555;
+    font-size: 12px;
   }
-  
-  .social-media {
-    margin-top: 20px;
+
+  .contact-info p {
+    color: #555;
+    font-size: 12px;
   }
-  
-  .social-media a {
-    color: #333;
-    font-size: 24px;
-    margin-right: 15px;
-  }
-  
-  .contact-info {
-    margin-top: 20px;
-  }
-  
-  .footer-links {
-    margin-top: 20px;
-  }
-  
-  .footer-links a {
-    color: #333;
-    text-decoration: none;
-    margin-right: 15px;
-  }
-  
+ 
+}
