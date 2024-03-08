@@ -17,7 +17,6 @@ import { RegisterComponent } from './component/register/register.component';
 import { environment } from 'src/environments/environment.development';
 import { VerifyEmailComponent } from './component/verify-email/verify-email.component';
 import { ForgetPasswordComponent } from './component/forget-password/forget-password.component';
-import { StartComponent } from './component/start/start.component';
 import { HttpClientModule} from '@angular/common/http';
 import { AboutUsComponent } from './component/about-us/about-us.component';
 import { ContactUsComponent } from './component/contact-us/contact-us.component';
@@ -45,7 +44,6 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     LogInComponent,
     VerifyEmailComponent,
     ForgetPasswordComponent,
-    StartComponent,
     AboutUsComponent,
     ContactUsComponent
   ],

@@ -27,6 +27,7 @@ export class CartService {
 
   removeFromCart(foodId:number):void{
     this.cart.items= this.cart.items.filter(item =>item.food.id !=foodId)
+    this.showSuccessMessage("Item removed Suceessfully");
   }
 
   changeQuantity(foodId:number,quantity:number ){
