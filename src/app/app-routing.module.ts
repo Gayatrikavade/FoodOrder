@@ -15,7 +15,8 @@ export const routes: Routes = [
   {path:'',redirectTo:'log-in',pathMatch:'full'},
   {path:'log-in',component:LogInComponent},
   {path:'register',component:RegisterComponent},
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard], 
+  {path: 'home', component: HomeComponent, canActivate: [AuthGuard]}, 
+  {path: 'home', component: HomeComponent, 
    children: [
     { path: '', redirectTo: 'main', pathMatch: 'full' }, // Redirect to main content
     { path: 'main', component: HomeComponent },
@@ -25,11 +26,18 @@ export const routes: Routes = [
   {path:'tag/:tags',component:HomeComponent ,canActivate: [AuthGuard]},
   {path:'food/:id',component:FoodpageComponent ,canActivate: [AuthGuard]},
   {path:'cart-page',component:CartPageComponent ,canActivate: [AuthGuard]},
+  {path:'search/:searchItem',component:HomeComponent },
+  {path:'tag/:tags',component:HomeComponent },
+  {path:'food/:id',component:FoodpageComponent},
+  {path:'cart-page',component:CartPageComponent },
   {path:'verify-email',component:VerifyEmailComponent},
   {path:'forget-password',component:ForgetPasswordComponent},
   {path:'home/about-us',component:AboutUsComponent ,canActivate: [AuthGuard]},
-  {path:'contactus',component:ContactUsComponent ,canActivate: [AuthGuard]}
+  {path:'contactus',component:ContactUsComponent ,canActivate: [AuthGuard]},
+  {path:'home/about-us',component:AboutUsComponent },
+  {path:'contactus',component:ContactUsComponent }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
